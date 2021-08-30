@@ -40,12 +40,19 @@ jobs:
 
             # run tests!
 
-            - run: mvn test || true
-            - run: mvn allure:report
+            #- run: mvn test || true
+            #- run: mvn allure:report
+
+            - run:
+                  shell: /bin/bash
+                  command: |
+                      cd ~/repo
+                      mvn test
+                      mvn allure:report
 
             - store_artifacts:
                   path: ~/repo/target/site/allure-maven-plugin
-                  destination: build
+                  destination: reports
             # Upload test results
             - store_test_results:
                   path: ~/repo/target/surefire-reports/testng-results.xml
