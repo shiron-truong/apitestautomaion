@@ -10,16 +10,16 @@ import org.aeonbits.owner.Config.LoadType;
         "classpath:api.properties"})
 public interface Configuration extends Config {
 
-    @Key("api.prod.base.path")
+    @Key("api.${env}.base.path")
     String basePath();
 
-    @Key("api.prod.base.uri")
+    @Key("api.${env}.base.uri")
     String baseURI();
 
-    @Key("api.prod.base.port")
+    @Key("api.${env}.base.port")
     int port();
 
-    @Key("api.prod.appid")
+    @Key("api.${env}.appid")
     String appid();
 
 }

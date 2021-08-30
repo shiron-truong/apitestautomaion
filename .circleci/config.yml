@@ -40,7 +40,7 @@ jobs:
 
             # run tests!
 
-            - run: mvn test
+            - run: mvn test -Denv=prod
             #- run: mvn allure:report
 
 #            - run:
