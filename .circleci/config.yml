@@ -40,15 +40,19 @@ jobs:
 
             # run tests!
 
-            #- run: mvn test || true
+            - run: mvn test
             #- run: mvn allure:report
 
+#            - run:
+#                  shell: /bin/bash
+#                  command: |
+#                      cd ~/repo
+#                      mvn test
+#                      mvn allure:report
             - run:
-                  shell: /bin/bash
-                  command: |
-                      cd ~/repo
-                      mvn test
-                      mvn allure:report
+                  name: generate report
+                  command: mvn allure:report
+                  when: always
 
             - store_artifacts:
                   path: ~/repo/target/site/allure-maven-plugin
