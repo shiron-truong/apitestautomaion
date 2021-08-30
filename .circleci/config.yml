@@ -48,4 +48,4 @@ jobs:
                   destination: build
             # Upload test results
             - store_test_results:
-                  path: ~/repo/target/surefire-reports
+                  path: ~/repo/target/surefire-reports/testng-results.xml
