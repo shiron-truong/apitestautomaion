@@ -11,15 +11,19 @@ import org.aeonbits.owner.Config.LoadType;
 public interface Configuration extends Config {
 
     @Key("api.${env}.base.path")
+//    @Key("api.prod.base.path")
     String basePath();
 
     @Key("api.${env}.base.uri")
+//    @Key("api.prod.base.uri")
     String baseURI();
 
     @Key("api.${env}.base.port")
+//    @Key("api.prod.base.port")
     int port();
 
     @Key("api.${env}.appid")
+//    @Key("api.prod.appid")
     String appid();
 
 }

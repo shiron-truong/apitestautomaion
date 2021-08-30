@@ -15,17 +15,20 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
 import java.io.FileReader;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import static io.restassured.RestAssured.*;
+import static io.restassured.config.EncoderConfig.encoderConfig;
 import static io.restassured.config.ParamConfig.UpdateStrategy.REPLACE;
 import static io.restassured.config.ParamConfig.paramConfig;
 
+
 public class TestBase {
-    public static Response response;
     public static RestAssuredConfig configParams;
     protected static Configuration configuration;
     public RequestSpecification defaultRequestSpecification;
@@ -43,17 +46,19 @@ public class TestBase {
         baseURI = configuration.baseURI();
         basePath = configuration.basePath();
         port = configuration.port();
-        configParams = config().paramConfig(paramConfig().queryParamsUpdateStrategy(REPLACE));
-
-        RestAssured.useRelaxedHTTPSValidation();
-        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+        configParams = config().
+                paramConfig(paramConfig().queryParamsUpdateStrategy(REPLACE)).
+                encoderConfig(encoderConfig().defaultQueryParameterCharset(StandardCharsets.UTF_8));
 
         defaultRequestSpecification = new RequestSpecBuilder().
                 setBaseUri(configuration.baseURI()).
                 setBasePath(configuration.basePath()).
                 setPort(configuration.port()).setConfig(configParams).
-                addQueryParam("appid", configuration.appid()).
+                addQueryParam("appid",configuration.appid()).
                 build();
+
+        RestAssured.useRelaxedHTTPSValidation();
+        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
     }
 
     @BeforeSuite
@@ -63,7 +68,7 @@ public class TestBase {
         String CSV_file = "src/test/resources/testdata/weather/" + suiteName + "Data.csv";
         CSVParser parser = new CSVParserBuilder().withSeparator(';').build();
         try {
-            FileReader filereader = new FileReader(CSV_file);
+            FileReader filereader = new FileReader(CSV_file, StandardCharsets.UTF_8);
             CSVReader csvReader = new CSVReaderBuilder(filereader)
                     .withCSVParser(parser)
                     .build();
@@ -73,5 +78,10 @@ public class TestBase {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @BeforeMethod
+    public void resetRequestSpecification(){
+        defaultRequestSpecification.queryParam("mode", "json");
     }
 }

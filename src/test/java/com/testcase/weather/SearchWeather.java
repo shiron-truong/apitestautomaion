@@ -1,6 +1,7 @@
 package com.testcase.weather;
 
 import com.baseclass.TestBase;
+import io.qameta.allure.Description;
 import io.restassured.http.ContentType;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -12,10 +13,10 @@ import java.util.Iterator;
 import static io.restassured.RestAssured.given;
 import static io.restassured.matcher.RestAssuredMatchers.matchesXsdInClasspath;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.*;
 
 
-public class SearchByCityName extends TestBase {
+public class SearchWeather extends TestBase {
 
     @DataProvider(name = "testData")
     public Object[][] prepareDataForMethod(Method method) {
@@ -36,76 +37,98 @@ public class SearchByCityName extends TestBase {
         return currentMethodData;
     }
 
-
+    @Description("Checking JSON schema for response data")
     @Test(priority = 1, dataProvider = "testData")
-    public void checkJsonSchema(String methodName, String input, String postMethod,
-                                String code, String expected) throws InterruptedException {
-        logger.info("Started TC001_checkJsonSchema");
+    public void checkJsonSchema(String methodName, String input,
+                                String code) throws InterruptedException {
+        logger.info("Started :" + methodName);
         defaultRequestSpecification.
-                queryParam("mode", "json").
                 queryParam("q", input);
         given().spec(defaultRequestSpecification).
-                when().
-                get().
-                then().
-                assertThat().
+        when().
+            get().
+        then().
+            assertThat().
                 statusCode(Integer.parseInt(code)).
-                and().
                 contentType(ContentType.JSON).
                 body(matchesJsonSchemaInClasspath("schemas/weather/weather_response_schema.json"));
 
         Thread.sleep(3);
     }
 
+    @Description("Checking XML schema for response data")
     @Test(priority = 2, dataProvider = "testData")
-    public void checkXMLSchema(String methodName, String input, String postMethod,
-                               String code, String expected) throws InterruptedException {
-        logger.info("Started TC001_checkXMLSchema");
+    public void checkXMLSchema(String methodName, String input,
+                               String code) throws InterruptedException {
+        logger.info("Started: " + methodName);
         defaultRequestSpecification.
                 queryParam("mode", "xml").
                 queryParam("q", input);
         given().spec(defaultRequestSpecification).
-                when().
-                get().
-                then().
-                assertThat().
+        when().
+            get().
+        then().
+            assertThat().
                 statusCode(Integer.parseInt(code)).
-                and().
                 contentType(ContentType.XML).
                 body(matchesXsdInClasspath("schemas/weather/weather_response_schema.xsd"));
+
         Thread.sleep(3);
     }
 
-    @Test(priority = 3, dataProvider = "testData")
-    public void checkExactCityName(String methodName, String input, String postMethod,
-                                   String statusCode, String expected) {
-        System.out.println("checkExactCityName testData[0] :" + methodName);
-
-    }
-
+//    @Test(priority = 3, dataProvider = "testData")
+//    public void checkCityName(String methodName, String input,
+//                                   String code, String expected) throws InterruptedException{
+//        logger.info("Started: " + methodName);
+//        defaultRequestSpecification.
+//                queryParam("mode", "json").
+//                queryParam("q", input);
+//        given().spec(defaultRequestSpecification).
+//                when().
+//                get().
+//                then().
+//                assertThat().
+//                    statusCode(Integer.parseInt(code)).
+//                    contentType(ContentType.JSON).
+//                    //body(matchesXsdInClasspath("schemas/weather/weather_response_schema.xsd")).
+//                    body("list.name", equalTo(expected));;
+//        Thread.sleep(3);
+//    }
+    @Description("Checking for input city name only")
     @Test(priority = 4, dataProvider = "testData")
-    public void checkSimilarCityName(String methodName, String input, String postMethod,
-                                     String statusCode, String expected) {
-        System.out.println("checkSimilarCityName testData[0] :" + methodName);
-    }
-
-    @Test(priority = 5, dataProvider = "testData")
-    public void checkLanguageSupport(String methodName, String input, String postMethod,
-                                     String code, String expected) throws InterruptedException {
-        System.out.println("checkSimilarCityName testData[0] :" + methodName);
-        logger.info("Started TC001_checkJsonSchema");
+    public void checkCityName(String methodName, String cityName,
+                                     String code, String expected) throws InterruptedException{
+        logger.info("Started: " + methodName);
         defaultRequestSpecification.
-                queryParam("mode", "json").
-                queryParam("q", input);
+                queryParam("q", cityName);
         given().spec(defaultRequestSpecification).
-                when().
-                get().
-                then().
-                assertThat().
+        when().
+            get().
+        then().
+            assertThat().
                 statusCode(Integer.parseInt(code)).
                 contentType(ContentType.JSON).
-                body(matchesJsonSchemaInClasspath("schemas/weather/weather_response_schema.json")).
-                body("name", equalTo(expected));
+                body("name", containsStringIgnoringCase(expected));
+        Thread.sleep(3);
+    }
+
+    @Description("Checking for result that the same language with input")
+    @Test(priority = 5, dataProvider = "testData")
+    public void checkMultipleLanguageSupport(String methodName, String input,
+                                     String code, String expected) throws InterruptedException {
+        logger.info("Started :" + methodName);
+        logger.info("Started :" + input);
+        defaultRequestSpecification.
+                queryParam("q", input);
+        given().spec(defaultRequestSpecification).
+        when().
+            get().
+        then().
+            assertThat().
+            statusCode(Integer.parseInt(code)).
+            contentType(ContentType.JSON).
+            body("name", equalTo(expected));
+
         Thread.sleep(3);
     }
 
@@ -140,3 +163,7 @@ public class SearchByCityName extends TestBase {
 //CheckSpecialCharactor
 //checkLongStringInput
 //checkWithHttp
+
+//valid responseField Value
+
+//dataprovider before method

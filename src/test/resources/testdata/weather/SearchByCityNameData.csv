@@ -1,4 +1,0 @@
-checkJsonSchema;London,UK;GET;200;London
-checkExactCityName;Hanoi;GET;200;Ha Noi
-checkSimilarCityName;London;GET;200;London
-checkLanguageSupport;"Thành phố Hồ Chí Minh";GET;200;"Thành phố Hồ Chí Minh"

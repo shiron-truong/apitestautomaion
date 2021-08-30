@@ -3,12 +3,7 @@
 <suite name="Suite">
     <test thread-count="2" name="Test">
         <classes>
-            <!--      <class name="com.testcase.DeleteRecord"/>-->
-            <!--      <class name="com.testcase.PutEmployeeRecord"/>-->
-            <!--      <class name="com.testcase.GetAllEmployees"/>-->
-            <!--      <class name="com.testcase.PostEmployeerecord"/>-->
-            <!--      <class name="com.testcase.GetSingleemployeeRecord"/>-->
-            <class name="com.testcase.weather.SearchByCityName"/>
+            <class name="com.testcase.weather.SearchWeather"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->

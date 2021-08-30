@@ -1,0 +1,10 @@
+checkJsonSchema;London,UK;200
+checkXMLSchema;London,UK;200
+checkCityName;Hanoi;200;Hanoi
+checkCityName;London;200;London
+checkMultipleLanguageSupport;Thành phố Hồ Chí Minh;200;"Ho Chi Minh City"
+checkMultipleLanguageSupport;"Thành phố Hồ Chí Minh";200;"Thành phố Hồ Chí Minh"
+checkMultipleLanguageSupport;"名古屋市";200;"Nagoya"
+checkMultipleLanguageSupport;"名古屋市";200;"名古屋市"
+
+
