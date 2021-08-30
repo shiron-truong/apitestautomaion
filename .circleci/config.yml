@@ -46,3 +46,6 @@ jobs:
             - store_artifacts:
                   path: ~/repo/target/site/allure-maven-plugin
                   destination: build
+            # Upload test results
+            - store_test_results:
+                  path:~/repo/target/surefire-reports
