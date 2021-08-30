@@ -53,12 +53,15 @@ Then tests can be run as mentioned in the next step.
 Run CLI: "<code>mvn test </code>" to build and execute tests
 
 ```batch
-mvn test 
+ mvn clean -Denv=prod test
+ 
+ env = prod,staging,test
 ```
-
-> Note: or just simply run <code> mvn test </code> to use default .
-
-This command will run only any scenario(in feature files) with tag as '@RegressionTest'.
+or run a specific testcase:
+```batch
+mvn -Dtest=SearchWeather#checkCityName -Denv=prod test
+```
+This command will run only test case checkCityName in SearchWeather suite.
 
 Once finished, there will be reports in ./target/surefire-reports/* folder.
 
@@ -107,16 +110,13 @@ Two options:
 
 * Run with the 'default' in testng.xml
      ```batch
-     mvn test 
+     mvn -Denv=prod test
      ```  
-* Run with selective tags by passing parameters as below
 
-     ```batch
-     mvn test -Denv=prod
-     ```
 
-5.3). If needed, Allure reports can be used for further integrations (Jenkins build itself or other integrations; such
-as Jira, qTest.
+5.3). If needed, Allure reports can be used for further integrations (Jenkins build itself).
+
+Reference: [Allure-report-integration-with-jenkins](https://www.qaautomation.co.in/2018/12/allure-report-integration-with-jenkins.html)
 
 ---
 <a name="outputexamples"></a>
