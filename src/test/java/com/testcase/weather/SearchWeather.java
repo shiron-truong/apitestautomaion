@@ -37,7 +37,7 @@ public class SearchWeather extends TestBase {
         return currentMethodData;
     }
 
-    @Description("Checking JSON schema for response data")
+    @Description("Contract Testing: Checking JSON schema for response data")
     @Test(priority = 1, dataProvider = "testData")
     public void checkJsonSchema(String methodName, String input,
                                 String code) throws InterruptedException {
@@ -56,7 +56,7 @@ public class SearchWeather extends TestBase {
         Thread.sleep(3);
     }
 
-    @Description("Checking XML schema for response data")
+    @Description("Contract Testing: Checking XML schema for response data")
     @Test(priority = 2, dataProvider = "testData")
     public void checkXMLSchema(String methodName, String input,
                                String code) throws InterruptedException {

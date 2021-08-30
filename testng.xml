@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Suite">
-    <test thread-count="2" name="Test">
+<suite name="Search Weather">
+    <test thread-count="4" name="Testcases">
         <classes>
             <class name="com.testcase.weather.SearchWeather"/>
         </classes>
