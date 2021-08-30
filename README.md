@@ -1,7 +1,7 @@
 # **API Automation Testing (For my home assignment: test openweathermap api)**
 
 API Test Automation in Java language using Java libraries; RestAssured (for API Service), along with Maven as a build
-tool and Test-ng as Test management (support data-driven testing).
+tool and Testng as Test management (support data-driven testing).
 
 # Table of Contents
 
