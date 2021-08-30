@@ -57,7 +57,7 @@ Run CLI: "<code>mvn test </code>" to build and execute tests
  
  env = prod,staging,test
 ```
-or run a specific testcase:
+or run a specific testcase :
 ```batch
 mvn -Dtest=SearchWeather#checkCityName -Denv=prod test
 ```
