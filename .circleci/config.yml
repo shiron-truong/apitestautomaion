@@ -53,10 +53,16 @@ jobs:
                   name: generate report
                   command: mvn allure:report
                   when: always
+            - run:
+                name: Save test results
+                command: |
+                  mkdir -p ~/test-results
+                  find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/test-results/ \;
+                when: always
+
+            - store_test_results:
+                path: ~/test-results
 
             - store_artifacts:
                   path: ~/repo/target/site/allure-maven-plugin
                   destination: reports
-            # Upload test results
-            - store_test_results:
-                  path: ~/repo/target/surefire-reports/testng-results.xml
