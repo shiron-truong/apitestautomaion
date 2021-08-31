@@ -1,4 +1,4 @@
-# **This is my repo for test home assignment: test openweathermap api)**
+# **This is my repo for a test home assignment: test openweathermap api)**
 
 This API Test Automation using Java libraries; RestAssured (for API Service), along with Maven as a build
 tool and Testng as Test management (support data-driven testing).
@@ -23,12 +23,12 @@ tool and Testng as Test management (support data-driven testing).
 * Support data-driven testing (Testng with @DataProvider), test data file which are stored under
   ./src/test/resources/testdata folder.
 
-> Note: Test data file is formatted as below (named as test_suite_name.cvs):
-> * Testcasename;data_input;response_status_code;expected_value(optional)
+> Note: Test data file is formatted as below (named as [test_suite_name]Data.cvs):
+> * TestMethodname;data_input;response_status_code;expected_value(field=value);TestCaseName
 
 * Using Allure for tests report, outputs will be produced under ./target/site/allure-maven-plugin folder.
 
-<a name="strucure"></a>
+<a name="structure"></a>
 ## 2. Project structure
 ```
 apitestautomation/
