@@ -1,15 +1,13 @@
 package com.baseclass;
 
-import com.opencsv.CSVParser;
-import com.opencsv.CSVParserBuilder;
-import com.opencsv.CSVReader;
-import com.opencsv.CSVReaderBuilder;
+import com.opencsv.*;
 import com.shiron.api.config.Configuration;
 import com.shiron.api.config.ConfigurationManager;
-import io.restassured.RestAssured;
+import io.qameta.allure.Allure;
+import io.qameta.allure.AllureLifecycle;
+import io.restassured.*;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.config.RestAssuredConfig;
-import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -17,11 +15,9 @@ import org.apache.log4j.PropertyConfigurator;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
-
 import java.io.FileReader;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-
 import static io.restassured.RestAssured.*;
 import static io.restassured.config.EncoderConfig.encoderConfig;
 import static io.restassured.config.ParamConfig.UpdateStrategy.REPLACE;
@@ -34,9 +30,10 @@ public class TestBase {
     public RequestSpecification defaultRequestSpecification;
     public Logger logger;
     public Object[][] dataMethod;
+    public AllureLifecycle lifecycle = Allure.getLifecycle();
 
     @BeforeClass
-    public void init() {
+    public void initBaseClass() {
         logger = Logger.getLogger(TestBase.class.getName());
         PropertyConfigurator.configure("src/test/resources/log4j.properties");
         logger.setLevel(Level.DEBUG);
@@ -84,4 +81,5 @@ public class TestBase {
     public void resetRequestSpecification(){
         defaultRequestSpecification.queryParam("mode", "json");
     }
+
 }
