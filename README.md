@@ -1,4 +1,4 @@
-# **This is my repo for test home assignment: test openweathermap api)**
+# **This is my repo for the test home assignment: test openweathermap api)**
 
 This API Test Automation using Java libraries; RestAssured (for API Service), along with Maven as a build
 tool and Testng as Test management (support data-driven testing).
