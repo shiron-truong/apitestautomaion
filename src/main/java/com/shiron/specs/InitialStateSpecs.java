@@ -1,7 +1,7 @@
-package com.shiron.api.specs;
+package com.shiron.specs;
 
-import com.shiron.api.config.Configuration;
-import com.shiron.api.config.ConfigurationManager;
+import com.shiron.config.Configuration;
+import com.shiron.config.ConfigurationManager;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.RequestSpecification;
 

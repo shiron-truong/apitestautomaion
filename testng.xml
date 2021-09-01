@@ -3,7 +3,7 @@
 <suite name="Search Weather">
     <test thread-count="4" name="Testcases">
         <classes>
-            <class name="com.testcase.weather.SearchWeather"/>
+            <class name="com.shiron.testcase.weather.SearchWeather"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->

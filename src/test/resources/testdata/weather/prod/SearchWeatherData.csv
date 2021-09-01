@@ -1,0 +1,16 @@
+checkJsonSchema;Franklin,US;200;;CheckBodyJSONSchema(Contract testing)
+checkXMLSchema;Franklin,US;200;;CheckBodyXMLSchema(Contract testing)
+checkCityName;Franklin;200;name=Franklin;SearchCityName
+checkCityName;Franklin,OHIO;200;name=Franklin;SearchCityNameAndStateName
+checkCityName;Franklin,OH;200;name=Franklin;SearchCityNameAndStateCode
+checkCityName;Franklin,United States;200;name=Franklin;SearchCityNameAndCountryName
+checkCityName;Franklin,US;200;name=Franklin;SearchCityNameAndCountryCode
+checkCityName;;400;message=Nothing to input;SearchCityNameWithEmptyString
+checkCityName;"!@#$%^&*()_+-{}':,.?";404;message=city not found;SearchCityNameWithSpecialCharacter
+checkCityName;fgddgsadgfdgdgagdagadggdafgadgfdagdgdagdfgdfgdagfgfdagffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff;404;message=city not found;SearchCityNameWithLongString
+checkCityName;Thành phố Hồ Chí Minh;200;name=Ho Chi Minh City;SearchVietnameseLanguage
+checkCityName;"Thành phố Hồ Chí Minh";200;name=Thành phố Hồ Chí Minh;CheckReturnVietnameseLanguage
+checkCityName;"名古屋市";200;name=Nagoya;SearchJapaneseLanguage
+checkCityName;"名古屋市";200;name=名古屋市;CheckReturnJapaneseLanguage
+
+
