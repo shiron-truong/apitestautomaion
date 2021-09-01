@@ -1,7 +1,7 @@
 # **This is my repo for a test home assignment: test openweathermap api)**
 
-This API Test Automation using Java libraries; RestAssured (for API Service), along with Maven as a build
-tool and Testng as Test management (support data-driven testing).
+This API Test Automation using Java libraries; RestAssured (for API Service), along with Maven as a build tool and
+Testng as Test management (support data-driven testing).
 
 # Table of Contents
 
@@ -10,8 +10,9 @@ tool and Testng as Test management (support data-driven testing).
 * [How to setup](#howtosetup)
 * [How to run tests and generate reports](#howtoruntests)
 * [Where to find Reports](#reports)
-* [Examples of Test Execution and HTML report](#outputexamples)
+* [CircleCI (CI/CD) Integration setup guideline](#circleci)
 * [Jenkins (CI/CD) Integration setup guideline](#jenkins)
+* [Examples of Test Execution and HTML report](#testExecution)
 
 <a name="overview"></a>
 
@@ -29,7 +30,9 @@ tool and Testng as Test management (support data-driven testing).
 * Using Allure for tests report, outputs will be produced under ./target/site/allure-maven-plugin folder.
 
 <a name="structure"></a>
+
 ## 2. Project structure
+
 ```
 apitestautomation/
 ┣ .circleci/     
@@ -42,20 +45,20 @@ apitestautomation/
 ┃ ┃ ┗ java/
 ┃ ┃   ┗ com/
 ┃ ┃ ┃   ┗ shiron/
-┃ ┃ ┃ ┃   ┗ api/
-┃ ┃ ┃ ┃ ┃   ┣ config/                         => Configuration manage
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ Configuration.java            
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ ConfigurationManager.java
-┃ ┃ ┃ ┃ ┃   ┗ specs/
-┃ ┃ ┃ ┃ ┃ ┃   ┗ InitialStateSpecs.java        => RequestSpecification class
+┃ ┃ ┃ ┃   ┣ config/                         => Configuration manage
+┃ ┃ ┃ ┃ ┃ ┃ ┣ Configuration.java            
+┃ ┃ ┃ ┃ ┃ ┃ ┗ ConfigurationManager.java
+┃ ┃ ┃ ┃   ┗ specs/
+┃ ┃ ┃ ┃ ┃   ┗ InitialStateSpecs.java        => RequestSpecification class
 ┃ ┗ test/
-┃   ┣ java/
+┃ ┃ ┣ java/
 ┃ ┃ ┃ ┗ com/
-┃ ┃ ┃   ┣ baseclass/
-┃ ┃ ┃ ┃ ┃ ┗ TestBase.java                     => Test base class
-┃ ┃ ┃   ┗ testcase/
-┃ ┃ ┃ ┃   ┗ weather/
-┃ ┃ ┃ ┃ ┃   ┗ SearchWeather.java              => Testsuite SearchWeather
+┃ ┃ ┃ ┃ ┗ shiron/
+┃ ┃ ┃ ┃ ┃ ┣ baseclass/
+┃ ┃ ┃ ┃ ┃ ┃ ┗ TestBase.java                   => Test base class
+┃ ┃ ┃ ┃ ┃ ┗ testcase/
+┃ ┃ ┃ ┃ ┃ ┃ ┗ weather/
+┃ ┃ ┃ ┃ ┃ ┃   ┗ SearchWeather.java            => Testsuite SearchWeather
 ┃   ┗ resources/
 ┃ ┃   ┣ schemas/                              => store expected schema for Contract testting
 ┃ ┃ ┃ ┃ ┗ weather/
@@ -78,6 +81,7 @@ apitestautomation/
 ```
 
 <a name="howtosetup"></a>
+
 ## 3. How to setup
 
 ___
@@ -92,24 +96,29 @@ Then tests can be run as mentioned in the next step.
 
 > Note: Git client and Maven are required to setup and run
 > * [Git Installation](https://www.atlassian.com/git/tutorials/install-git)
-> * [Apache Maven Installation](http://maven.apache.org/install.html/)
+> * [Apache Maven Installation](https://maven.apache.org/install.html)
 --- 
 
 <a name="howtoruntests"></a>
 
 ## 4. How to run tests and generate reports
 
-Run CLI: "<code>mvn -Denv=prod test </code>" to build and execute tests
+Run CLI: "<code>mvn test</code> with option params" to build and execute tests
 
 ```batch
- mvn -Denv=prod test
+ mvn clean test
+ mvn test (default env is prod)
+ mvn -Denv=staging test
  
  env is prod,staging,test (match with value that define in test/resources/api.properties)
 ```
+
 or run a specific testcase :
+
 ```batch
-mvn -Dtest=SearchWeather#checkCityName -Denv=prod test
+mvn -Dtest=SearchWeather#checkCityName test
 ```
+
 This command will run only test case checkCityName in SearchWeather suite.
 
 Once finished, there will be reports in ./target/surefire-reports/* folder.
@@ -117,15 +126,17 @@ Once finished, there will be reports in ./target/surefire-reports/* folder.
 To generate Allure report, run below command:
 
 ```batch
-mvn allure:report 
-or
 mvn allure:serve
 ```
+Once finished, there will be opens browser for report.
 
-Once finished, there will be reports in ./target/site/allure-maven-plugin/* folder.
+Or
+```
+mvn allure:report 
+```
+There will be reports in ./target/site/allure-maven-plugin/* folder.
 
 ---
-
 <a name="reports"></a>
 
 ## 5. Where to find reports
@@ -141,12 +152,17 @@ Allure reports:
 * or local server will run and public to show on local browser (mvn allure:serve).
 
 ---
-<a name="jenkins"></a>
+<a name="circleci"></a>
 
 ## 6. CircleCI (CI/CD) Integration setup guideline
+
 CircleCI configuration file is located at ./circleci/config.yml
 
+<a name="jenkins"></a>
+
+---
 ## 7. Jenkins (CI/CD) Integration setup guideline
+
 In your new Jenkins Job:
 
 7.1) Under Git Integration: pull source code from github:
@@ -161,7 +177,7 @@ Two options:
 
 * Run with the 'default' in testng.xml
      ```batch
-     mvn -Denv=prod test
+     mvn test
      ```  
 * Run with the test parameters:
   ```
@@ -173,11 +189,15 @@ Two options:
 Reference: [Allure-report-integration-with-jenkins](https://www.qaautomation.co.in/2018/12/allure-report-integration-with-jenkins.html)
 
 ---
-<a name="outputexamples"></a>
+<a name="testExecution"></a>
 
 ## 8. Examples of Test Execution on loca and on cloud(CircleCI)
 
+8.1). Execute test on loca:
+
 ![Image](./demo/run_test.gif)
+
+8.2). Execute pipeline on CircleCI:
 
 ![Image](./demo/circleci.gif)
 

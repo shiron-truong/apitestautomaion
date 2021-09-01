@@ -1,4 +1,4 @@
-package com.shiron.api.config;
+package com.shiron.config;
 
 import org.aeonbits.owner.ConfigCache;
 
