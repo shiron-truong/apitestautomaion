@@ -40,15 +40,7 @@ jobs:
 
       # run tests!
 
-      - run: mvn test -Denv=prod
-      #- run: mvn allure:report
-
-      #            - run:
-      #                  shell: /bin/bash
-      #                  command: |
-      #                      cd ~/repo
-      #                      mvn test
-      #                      mvn allure:report
+      - run: mvn test
       - run:
           name: generate report
           command: mvn allure:report
@@ -59,9 +51,6 @@ jobs:
             mkdir -p ~/test-results
             find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/test-results/ \;
           when: always
-
-      - store_test_results:
-          path: ~/test-results
 
       - store_artifacts:
           path: ~/repo/target/site/allure-maven-plugin
