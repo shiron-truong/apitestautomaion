@@ -110,26 +110,6 @@
             <type>pom</type>
         </dependency>
 
-<!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.codehaus.groovy/groovy-json &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.codehaus.groovy</groupId>-->
-<!--            <artifactId>groovy-json</artifactId>-->
-<!--            <version>3.0.8</version>-->
-<!--        </dependency>-->
-
-<!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.codehaus.groovy/groovy-xml &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.codehaus.groovy</groupId>-->
-<!--            <artifactId>groovy-xml</artifactId>-->
-<!--            <version>3.0.8</version>-->
-<!--        </dependency>-->
-<!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.codehaus.groovy/groovy &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.codehaus.groovy</groupId>-->
-<!--            <artifactId>groovy</artifactId>-->
-<!--            <version>3.0.8</version>-->
-<!--        </dependency>-->
-
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>json-schema-validator</artifactId>

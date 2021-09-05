@@ -76,6 +76,7 @@ public class SearchWeather extends TestBase {
                 when().
                 get().
                 then().
+                log().ifValidationFails(LogDetail.BODY).
                 assertThat().
                 statusCode(Integer.parseInt(dataArgs[2])).
                 contentType(ContentType.JSON).
@@ -106,7 +107,8 @@ public class SearchWeather extends TestBase {
      * checkCityName: test method to test all cases from test data file
      * @param dataArgs - Data from dataprovider
      */
-    @Test(priority = 3, dataProvider = "testData", dependsOnMethods = "checkJsonSchema")
+    @Test(priority = 3, dataProvider = "testData",
+            dependsOnMethods = "checkJsonSchema")
     public void checkCityName(String[] dataArgs) {
         Map<String, String> expected = parseExpectedData(dataArgs[3]);
         lifecycle.updateTestCase(testResult -> testResult.setName(dataArgs[dataArgs.length - 1]));
@@ -117,6 +119,7 @@ public class SearchWeather extends TestBase {
                         when().
                         get().
                         then().
+                        log().ifValidationFails(LogDetail.BODY).
                         assertThat().
                         statusCode(Integer.parseInt(dataArgs[2])).
                         contentType(ContentType.JSON);

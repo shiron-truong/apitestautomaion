@@ -33,14 +33,12 @@ public class TestBase {
     public Object[][] dataMethod;
     public AllureLifecycle lifecycle = Allure.getLifecycle();
 
-    @BeforeSuite
+    @BeforeSuite(alwaysRun = true)
     public void initBaseClass() {
         logger = Logger.getLogger(TestBase.class.getName());
         PropertyConfigurator.configure("src/test/resources/log4j.properties");
         logger.setLevel(Level.DEBUG);
-
         configuration = ConfigurationManager.getConfiguration();
-
         baseURI = configuration.baseURI();
         basePath = configuration.basePath();
         port = configuration.port();
@@ -59,7 +57,7 @@ public class TestBase {
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
     }
 
-    @BeforeSuite(dependsOnMethods = "initBaseClass")
+    @BeforeSuite(dependsOnMethods = "initBaseClass", alwaysRun = true)
     public void createDataFromCSV() {
         dataMethod = new Object[][]{};
         String suiteName = this.getClass().getSimpleName();
@@ -79,7 +77,7 @@ public class TestBase {
         }
     }
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void resetRequestSpecification() {
         defaultRequestSpecification.queryParam("mode", "json");
     }
